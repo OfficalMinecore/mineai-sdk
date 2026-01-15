@@ -1,0 +1,41 @@
+{
+    "name": "mineai-sdk",
+    "version": "1.1.0",
+    "description": "Official Node.js SDK for MineAI",
+    "main": "src/index.js",
+    "type": "module",
+    "sideEffects": false,
+    "exports": {
+        ".": "./src/index.js"
+    },
+    "files": [
+        "src",
+        "README.md"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "mineai",
+        "ai",
+        "sdk",
+        "chat",
+        "completions"
+    ],
+    "author": "MineAI",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MineAI/mineai-sdk.git"
+    },
+    "bugs": {
+        "url": "https://github.com/MineAI/mineai-sdk/issues"
+    },
+    "homepage": "https://studio.minecloud.site",
+    "engines": {
+        "node": ">=12.20.0"
+    },
+    "dependencies": {
+        "node-fetch": "^3.3.2"
+    }
+}
