@@ -1,6 +1,11 @@
 # MineAI Node.js SDK
 
-The official Node.js SDK from [MineAI](https://studio.minecloud.site).
+The official Node.js SDK from [MineAI-Studio](https://studio.getmineai.site).
+
+Powered by [http://getmineai.site/](http://getmineai.site/)
+
+- [Github](https://github.com/mineai)
+- [Discord Server](https://discord.gg/fbfdwpHctb)
 
 ## Installation
 
@@ -75,7 +80,7 @@ streamChat();
 
 ### Using Memory
 
-Enable memory to persist conversation context automatically.
+Enable memory to persist conversation context automatically. This feature allows the AI to remember previous interactions within a session without you needing to manage the history manually.
 
 ```javascript
 import MineAI, { Models } from 'mineai-sdk';
@@ -83,16 +88,24 @@ import MineAI, { Models } from 'mineai-sdk';
 const client = new MineAI('YOUR_API_KEY');
 
 async function chatWithMemory() {
-  const response = await client.chat.completions.create({
+  // First interaction: AI learns your name
+  await client.chat.completions.create({
     model: Models.R3_RT_Z,
-    messages: [
-      { role: 'user', content: 'My name is Alice.' }
-    ],
-    memory: true // Enables server-side memory
+    messages: [{ role: 'user', content: 'My name is Alice.' }],
+    memory: true
   });
 
-  console.log(response.choices[0].message.content);
+  // Second interaction: AI remembers your name
+  const response = await client.chat.completions.create({
+    model: Models.R3_RT_Z,
+    messages: [{ role: 'user', content: 'What is my name?' }],
+    memory: true
+  });
+
+  console.log(response.choices[0].message.content); // Should mention "Alice"
 }
+
+chatWithMemory();
 ```
 
 ## Configuration
@@ -114,3 +127,9 @@ const client = new MineAI('YOUR_API_KEY', {
 ## Requirements
 
 - Node.js >= 12.0.0
+
+## Troubleshooting
+
+### ESLint Issues
+
+In older versions of the SDK, you might encounter ESLint issues & Code Quality issues. We recommend using the latest version to avoid these problems.
