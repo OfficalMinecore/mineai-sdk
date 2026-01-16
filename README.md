@@ -88,25 +88,34 @@ import MineAI, { Models } from 'mineai-sdk';
 const client = new MineAI('YOUR_API_KEY');
 
 async function chatWithMemory() {
-  // First interaction: AI learns your name
-  await client.chat.completions.create({
-    model: Models.R3_RT_Z,
-    messages: [{ role: 'user', content: 'My name is Alice.' }],
-    memory: true
-  });
+  try {
+    // First interaction: AI learns your name
+    console.log("Sending first message...");
+    await client.chat.completions.create({
+      model: Models.R3_RT_Z,
+      messages: [{ role: 'user', content: 'My name is Alice.' }],
+      memory: true
+    });
 
-  // Second interaction: AI remembers your name
-  const response = await client.chat.completions.create({
-    model: Models.R3_RT_Z,
-    messages: [{ role: 'user', content: 'What is my name?' }],
-    memory: true
-  });
+    // Second interaction: AI remembers your name
+    console.log("Sending second message...");
+    const response = await client.chat.completions.create({
+      model: Models.R3_RT_Z,
+      messages: [{ role: 'user', content: 'What is my name?' }],
+      memory: true
+    });
 
-  console.log(response.choices[0].message.content); // Should mention "Alice"
+    console.log('AI Response:', response.choices[0].message.content); // Should mention "Alice"
+  } catch (error) {
+    console.error('Memory Chat Error:', error.message);
+  }
 }
 
 chatWithMemory();
 ```
+
+> [!TIP]
+> Memories stored in the database are automatically removed after 3 days.
 
 ## Configuration
 
@@ -130,6 +139,8 @@ const client = new MineAI('YOUR_API_KEY', {
 
 ## Troubleshooting
 
-### ESLint Issues
-
-In older versions of the SDK, you might encounter ESLint issues & Code Quality issues. We recommend using the latest version to avoid these problems.
+### Issues
+- In older versions, memory functionality was limited or broken.
+- Older versions may trigger ESLint or code quality warnings.
+- Legacy versions are no longer supported and may contain bugs.
+- **Latest Version** is highly recommended for stability and new features.

@@ -36,8 +36,9 @@ export class MineAI {
      * @param {Array} params.messages - Array of message objects
      * @param {boolean} [params.stream=false] - Whether to stream the response
      * @param {boolean} [params.memory=false] - Whether to enable memory
+     * @param {string} [params.sessionId] - Optional session ID for memory
      */
-    async _createChatCompletion({ model, messages, stream = false, memory = false }) {
+    async _createChatCompletion({ model, messages, stream = false, memory = false, sessionId }) {
         if (!model) throw new Error("Model is required");
         if (!messages || !Array.isArray(messages)) throw new Error("Messages array is required");
 
@@ -48,6 +49,9 @@ export class MineAI {
 
         if (memory) {
             headers['Memory'] = 'true';
+            if (sessionId) {
+                headers['Session-Id'] = sessionId;
+            }
         }
 
         const body = JSON.stringify({
@@ -91,7 +95,9 @@ export class MineAI {
             case 400:
                 throw new Error(`[400] Bad Request: ${errorMessage}`);
             case 401:
-                throw new Error(`[401] Unauthorized: ${errorMessage} (Check your API Key)`);
+                // Clean up the error message if it already contains "Unauthorized"
+                const cleanMessage = errorMessage.replace(/^Unauthorized:\s*/i, "");
+                throw new Error(`[401] Unauthorized: ${cleanMessage} (Check your API Key)`);
             case 402:
                 throw new Error(`[402] Payment Required: ${errorMessage} (Insufficient credits)`);
             case 500:

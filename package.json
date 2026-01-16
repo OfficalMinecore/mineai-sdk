@@ -1,6 +1,6 @@
 {
     "name": "mineai-sdk",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Official Node.js SDK from MineAI",
     "main": "src/index.js",
     "type": "module",
