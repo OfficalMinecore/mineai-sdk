@@ -4,7 +4,7 @@ The official Node.js SDK from [MineAI-Studio](https://studio.getmineai.site).
 
 Powered by [http://getmineai.site/](http://getmineai.site/)
 
-- [Github](https://github.com/mineai)
+- [Github](https://github.com/OfficalMinecore/mineai-sdk)
 - [Discord Server](https://discord.gg/fbfdwpHctb)
 
 ## Installation

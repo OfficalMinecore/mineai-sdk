@@ -8,14 +8,14 @@ export class MineAI {
     /**
      * @param {string} apiKey - Your MineAI API Key
      * @param {Object} options - Configuration options
-     * @param {string} [options.baseUrl="https://studio.minecloud.site"] - Base API URL
+     * @param {string} [options.baseUrl="https://studio.getmineai.site"] - Base API URL
      */
     constructor(apiKey, options = {}) {
         if (!apiKey) {
             throw new Error("MineAI API Key is required");
         }
         this.apiKey = apiKey;
-        this.baseUrl = options.baseUrl || "https://studio.minecloud.site";
+        this.baseUrl = options.baseUrl || "https://studio.getmineai.site";
     }
 
     /**
@@ -52,7 +52,7 @@ export class MineAI {
 
         const body = JSON.stringify({
             model,
-            messages,
+            messages: memory ? [messages[messages.length - 1]] : messages,
             stream
         });
 
