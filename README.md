@@ -137,8 +137,6 @@ const client = new MineAI('YOUR_API_KEY', {
 
 - Node.js >= 12.0.0
 
-## Troubleshooting
-
 ### Issues
 - In older versions, memory functionality was limited or broken.
 - Older versions may trigger ESLint or code quality warnings.
