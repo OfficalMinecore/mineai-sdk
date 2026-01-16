@@ -5,7 +5,7 @@ The official Node.js SDK from [MineAI-Studio](https://studio.getmineai.site).
 Powered by [http://getmineai.site/](http://getmineai.site/)
 
 - [Github](https://github.com/OfficalMinecore/mineai-sdk)
-- [Discord Server](https://discord.gg/fbfdwpHctb)
+- [Discord Server](https://discord.gg/fbfdwpHctb) – Join the server and ping an admin or senior staff to claim your API key. **API Key price is $29.**
 
 ## Installation
 
