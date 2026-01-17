@@ -148,7 +148,7 @@ const client = new MineAI('YOUR_API_KEY', {
 
 ### Integrations:
 
-- Go To [MineAI-Studio](http://localhost:8080/dashboard/docs) 
+- Go To [MineAI-Studio](https://studio.getmineai.site/) 
 - Select SDK
 - Click On Discord Bot
 - Copy the code and paste it in your file.
