@@ -5,7 +5,7 @@ The official Node.js SDK from [MineAI-Studio](https://studio.getmineai.site).
 Powered by [http://getmineai.site/](http://getmineai.site/)
 
 - [Github](https://github.com/OfficalMinecore/mineai-sdk)
-- [Discord Server](https://discord.gg/fbfdwpHctb) – Join the server and ping an admin or senior staff to claim your API key. **API Key price is $29.**
+- [Discord Server](https://discord.gg/fbfdwpHctb) – Join the server for Support.
 
 ## Installation
 
@@ -137,8 +137,18 @@ const client = new MineAI('YOUR_API_KEY', {
 
 - Node.js >= 12.0.0
 
+## Troubleshooting
+
 ### Issues
 - In older versions, memory functionality was limited or broken.
 - Older versions may trigger ESLint or code quality warnings.
 - Legacy versions are no longer supported and may contain bugs.
+- **1.2.3** is also stable version for your.
 - **Latest Version** is highly recommended for stability and new features.
+
+### Integrations:
+
+- Go To [Discord](http://localhost:8080/dashboard/docs) 
+- Select SDK
+- Click On Discord Bot
+- Copy the code and paste it in your file.
