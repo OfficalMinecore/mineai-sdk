@@ -37,10 +37,28 @@ export class MineAI {
      * @param {boolean} [params.stream=false] - Whether to stream the response
      * @param {boolean} [params.memory=false] - Whether to enable memory
      * @param {string} [params.sessionId] - Optional session ID for memory
+     * @param {number} [params.temperature] - Optional temperature
+     * @param {number} [params.max_tokens] - Optional max tokens
+     * @param {boolean} [params.retry_on_failure=false] - Optional retry on failure
      */
-    async _createChatCompletion({ model, messages, stream = false, memory = false, sessionId }) {
+    async _createChatCompletion({
+        model,
+        messages,
+        stream = false,
+        memory = false,
+        sessionId,
+        temperature,
+        max_tokens,
+        retry_on_failure = false
+    }) {
         if (!model) throw new Error("Model is required");
         if (!messages || !Array.isArray(messages)) throw new Error("Messages array is required");
+
+        // Simple client-side rate limiting (prevent burst)
+        if (this._lastRequestTime && Date.now() - this._lastRequestTime < 200) {
+            await new Promise(resolve => setTimeout(resolve, 200 - (Date.now() - this._lastRequestTime)));
+        }
+        this._lastRequestTime = Date.now();
 
         const headers = {
             'Authorization': `Bearer ${this.apiKey}`,
@@ -57,7 +75,10 @@ export class MineAI {
         const body = JSON.stringify({
             model,
             messages: memory ? [messages[messages.length - 1]] : messages,
-            stream
+            stream,
+            temperature,
+            max_tokens,
+            retry_on_failure
         });
 
         const response = await fetch(`${this.baseUrl}/v1/chat/completions`, {
@@ -73,7 +94,15 @@ export class MineAI {
         if (stream) {
             return this._handleStream(response);
         } else {
-            return await response.json();
+            const data = await response.json();
+
+            // Handle server-side throttling
+            if (data.throttle && data.delay) {
+                console.warn(`[MineAI] Throttled: ${data.message || "Waiting for delay..."}`);
+                await new Promise(resolve => setTimeout(resolve, data.delay));
+            }
+
+            return data;
         }
     }
 
@@ -117,3 +146,4 @@ export class MineAI {
         return response.body;
     }
 }
+
