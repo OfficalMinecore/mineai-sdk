@@ -116,6 +116,33 @@ chatWithMemory();
 
 > [!TIP]
 > Memories stored in the database are automatically removed after 3 days.
+> **Note**: For `mine:o1-free` model, memory is restricted to the last 10 messages for non-owner keys.
+
+### Advanced Parameters
+
+The SDK supports additional parameters to control the AI's behavior:
+
+```javascript
+const response = await client.chat.completions.create({
+  model: Models.R3_RT_Y,
+  messages: [{ role: 'user', content: 'Hello!' }],
+  temperature: 0.7,         // Control randomness (0.0 - 2.0)
+  max_tokens: 100,          // Limit response length
+  retry_on_failure: true    // Auto-retry on server errors
+});
+```
+
+### Rate Limiting & Throttling
+
+The SDK includes built-in client-side rate limiting to prevent burst requests. Additionally, it automatically handles server-side throttling by waiting for the required delay before returning the response.
+
+```javascript
+// The SDK will automatically wait if the server requests a delay
+const response = await client.chat.completions.create({
+  model: Models.R3_RT_Y,
+  messages: [{ role: 'user', content: 'High frequency request' }]
+});
+```
 
 ## Configuration
 
@@ -152,3 +179,4 @@ const client = new MineAI('YOUR_API_KEY', {
 - Select SDK
 - Click On Discord Bot
 - Copy the code and paste it in your file.
+
