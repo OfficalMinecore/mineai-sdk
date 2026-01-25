@@ -1,6 +1,6 @@
 {
     "name": "mineai-sdk",
-    "version": "1.2.3",
+    "version": "1.3.0",
     "description": "Official Node.js SDK from MineAI",
     "main": "src/index.js",
     "type": "module",
@@ -29,5 +29,8 @@
     },
     "dependencies": {
         "node-fetch": "^3.3.2"
-    }
+    },
+    "Studio": "http://studio.getmineai.site/",
+    "Github": "https://github.com/OfficalMinecore/mineai-sdk",
+    "discord": "https://discord.gg/https://discord.gg/zAZ9dTCccd"
 }
